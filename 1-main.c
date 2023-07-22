@@ -54,3 +54,8 @@ int main(void)
     print_list(list);
     return (0);
 }
+
+/*
+case where we move to start
+
+*/
