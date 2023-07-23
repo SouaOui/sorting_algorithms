@@ -15,9 +15,6 @@ void insertion_sort_list(listint_t **list)
     {
         n = current->n;
         tmp = current->next;
-        if (previous)
-            printf("\n- cur: %d - pr: %d\n", current->n, previous->n);
-        print_list(*list);
         if (n < previous->n)
         {
             if (!current->next && !previous->prev)
@@ -32,7 +29,6 @@ void insertion_sort_list(listint_t **list)
                 current->prev = NULL;
                 *list = current;
                 print_list(*list);
-                printf("1- ");
                 return;
             }
             else if (!previous->prev)
@@ -47,7 +43,6 @@ void insertion_sort_list(listint_t **list)
                 current->prev = NULL;
                 *list = current;
                 print_list(*list);
-                printf("2- ");
             }
             else
             {
@@ -55,8 +50,6 @@ void insertion_sort_list(listint_t **list)
                 {
                     if (n < previous->n)
                     {
-                        printf("+%d/\n", previous->n);
-                        print_list(*list);
                         if (previous->prev)
                             previous->prev->next = current;
                         current->prev = previous->prev;
@@ -69,31 +62,15 @@ void insertion_sort_list(listint_t **list)
                         if (!previous)
                             *list = current;
                         print_list(*list);
-                        if (previous)
-                            printf(".c%d .p%d\n", current->n, previous->n);
-                        printf("3- ");
                     }
                     else
                         break;
                 }
             }
         }
-        else
-        {
-            print_list(*list);
-            printf("0- ");
-        }
-        printf("\n");
-
-        printf("axx\n");
-        if (previous)
-            printf("..c%d ..p%d\n", current->n, previous->n);
         current = tmp;
-        printf("axxx\n");
-        if(!current)
+        if (!current)
             break;
         previous = current->prev;
-        printf("ax\n");
     }
-    printf("a\n");
 }
