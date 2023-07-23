@@ -59,20 +59,7 @@ void insertion_sort_list(listint_t **list)
 				while (previous)
 				{
 					if (n < previous->n)
-					{
-						if (previous->prev)
-							previous->prev->next = current;
-						current->prev = previous->prev;
-						previous->next = current->next;
-						previous->prev = current;
-						if (current->next)
-							current->next->prev = previous;
-						current->next = previous;
-						previous = current->prev;
-						if (!previous)
-							*list = current;
-						print_list(*list);
-					}
+						swap(list, &previous, &current);
 					else
 						break;
 				}
