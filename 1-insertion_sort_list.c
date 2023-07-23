@@ -25,7 +25,6 @@ void swap(listint_t **list, listint_t **previous, listint_t **current)
 
 /**
  * insertion_sort_list - Entry point
-
  * @list: The character to print
  * Return: Always 0 (Success)
  */
@@ -54,15 +53,12 @@ void insertion_sort_list(listint_t **list)
 				print_list(*list);
 				return;
 			}
-			else
+			while (previous)
 			{
-				while (previous)
-				{
-					if (n < previous->n)
-						swap(list, &previous, &current);
-					else
-						break;
-				}
+				if (n < previous->n)
+					swap(list, &previous, &current);
+				else
+					break;
 			}
 		}
 		current = tmp;
