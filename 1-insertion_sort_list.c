@@ -2,7 +2,7 @@
 
 void insertion_sort_list(listint_t **list)
 {
-    listint_t *current, *previous, *tmp, *target;
+    listint_t *current, *previous, *tmp;
     int n;
 
     /* check empty list and only one element in list */
@@ -14,7 +14,9 @@ void insertion_sort_list(listint_t **list)
     while (current)
     {
         n = current->n;
-        printf("\n- cur: %d - pr: %d\n", current->n, previous->n);
+        tmp = current->next;
+        if (previous)
+            printf("\n- cur: %d - pr: %d\n", current->n, previous->n);
         print_list(*list);
         if (n < previous->n)
         {
@@ -46,55 +48,34 @@ void insertion_sort_list(listint_t **list)
                 *list = current;
                 print_list(*list);
                 printf("2- ");
-                return;
             }
             else
             {
-                target = current;
-                tmp = current->next;
-                current = previous;
                 while (previous)
                 {
-                    if (n < previous->n && tmp)
-                    {
-                        printf("*%d/\n", previous->n);
-                        /* swap any element deep 3+ in list*/
-                        tmp->prev = previous;
-                        previous->next = tmp;
-                        /* use to change previous->prev*/
-                        /*tmp = previous; tmp->prev = x;*/
-                        tmp = previous;
-                        previous = previous->prev;
-                        if (previous)
-                            continue;
-                    }
-                    else if (n < previous->n && !tmp)
+                    if (n < previous->n)
                     {
                         printf("+%d/\n", previous->n);
-                        previous->prev->next = target;
-                        target->prev = previous->prev;
-                        previous->next = NULL;
-                        previous->prev = target;
                         print_list(*list);
-                        continue;
+                        if (previous->prev)
+                            previous->prev->next = current;
+                        current->prev = previous->prev;
+                        previous->next = current->next;
+                        previous->prev = current;
+                        if (current->next)
+                            current->next->prev = previous;
+                        current->next = previous;
+                        previous = current->prev;
+                        if (!previous)
+                            *list = current;
+                        print_list(*list);
+                        if (previous)
+                            printf(".c%d .p%d\n", current->n, previous->n);
+                        printf("3- ");
                     }
-                    printf("_ \n");
-                    /*
-                    comparaison stop we found
-                    previous is less than current
-                    */
-                    tmp->prev = target;
-                    if (previous)
-                        previous->next = target;
-                    target->next = tmp;
-                    target->prev = previous;
-                    if (!previous)
-                        *list = target;
-                    break;
+                    else
+                        break;
                 }
-
-                print_list(*list);
-                printf("3- ");
             }
         }
         else
@@ -103,7 +84,16 @@ void insertion_sort_list(listint_t **list)
             printf("0- ");
         }
         printf("\n");
-        previous = current;
-        current = current->next;
+
+        printf("axx\n");
+        if (previous)
+            printf("..c%d ..p%d\n", current->n, previous->n);
+        current = tmp;
+        printf("axxx\n");
+        if(!current)
+            break;
+        previous = current->prev;
+        printf("ax\n");
     }
+    printf("a\n");
 }
