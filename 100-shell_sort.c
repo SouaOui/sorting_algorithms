@@ -16,15 +16,15 @@ void shell_sort(int *array, size_t size)
 	{
 		for (i = 0; i + gap < size; i++)
 		{
-			if (array[i + gap] < array[i])
+			if (array[i] > array[i + gap])
 			{
-				for (j = i + gap, ii = i; j >= 0; j = j - gap, ii = ii - gap)
+				for (j = i + gap, ii = i; j >= 0 && ii >= 0; j = j - gap, ii = ii - gap)
 				{
-					if (array[j] < array[ii])
+					if (array[ii] > array[j])
 					{
-						tmp = array[j + gap];
-						array[j + gap] = array[j];
-						array[j] = tmp;
+						tmp = array[j];
+						array[j] = array[i];
+						array[i] = tmp;
 					}
 				}
 			}
@@ -36,7 +36,7 @@ void shell_sort(int *array, size_t size)
 	i = 0;
 	for (i = 1; i < size; i++)
 	{
-		if (array[i] < array[i - 1])
+		if (array[i - 1] > array[i])
 		{
 			for (j = i - 1, ii = i; j >= 0; j--, ii--)
 			{
