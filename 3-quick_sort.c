@@ -1,6 +1,6 @@
 #include "sort.h"
 #define test 0
-#define comp 0
+static int comp = 1;
 
 /**
  * swap - Entry point
@@ -28,7 +28,6 @@ size_t partition(int *array, size_t low, size_t high)
 	size_t i = low - 1;
 	size_t j;
 
-	comp++;
 	if (test)
 		printf("%d ", comp);
 	for (j = low; j < high; j++)
@@ -60,6 +59,8 @@ size_t partition(int *array, size_t low, size_t high)
 		print_array(array, 10);
 	if (test)
 		printf("value of index pivot is %ld\n", i + 1);
+
+	comp++;
 	return (i + 1);
 }
 
