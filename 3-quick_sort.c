@@ -1,107 +1,73 @@
 #include "sort.h"
-#define test 0
-static int comp = 1;
-
 /**
- * swap - Entry point
- * @a: arg
- * @b: arg
- * Return: -
+ * swap - simple function to swap two values
+ * @a: First element
+ * @b: Second element
+ * Return: Nothing
  */
 void swap(int *a, int *b)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
-
 /**
- * partition - Entry point
- * @array: arg
- * @low: arg
- * @high: arg
- * Return: -
+ * partition - function to correct position of the pivot
+ * @array: pointer to array
+ * @low: index of the start
+ * @high: index of the end
+ * Return: Nothing
  */
 size_t partition(int *array, size_t low, size_t high)
 {
-	int pivot = array[high];
-	size_t i = low - 1;
-	size_t j;
+    int pivot = array[high];
+    size_t i = low - 1;
+    size_t j;
 
-	if (test)
-		printf("%d ", comp);
-	for (j = low; j < high; j++)
-	{
-		if (array[j] <= pivot)
-		{
-			i++;
-			if (i != j)
-			{
-				swap(&array[i], &array[j]);
-
-				if (test)
-				{
-					printf("-");
-				}
-
-				print_array(array, 10);
-			}
-		}
-	}
-	swap(&array[i + 1], &array[high]);
-
-	if (test)
-	{
-		printf("%d ", comp);
-		printf("_");
-	}
-	if (array[i + 1] != array[high])
-		print_array(array, 10);
-	if (test)
-		printf("value of index pivot is %ld\n", i + 1);
-
-	comp++;
-	return (i + 1);
+    for (j = low; j < high; j++)
+    {
+        if (array[j] <= pivot)
+        {
+            i++;
+            if (i != j)
+            {
+                swap(&array[i], &array[j]);
+                print_array(array, 10);
+            }
+        }
+    }
+    swap(&array[i + 1], &array[high]);
+    if (array[i + 1] != array[high])
+        print_array(array, 10);
+    return (i + 1);
 }
-
 /**
- * quick_sort_recursion - Entry point
- * @array: arg
- * @low: arg
- * @high: arg
- * Return: -
+ * quick_sort_recursion - function helper to do sort subarrays
+ * @array: array of integers
+ * @low: index of the start
+ * @high: index of the end
+ * Return: Nothing
  */
 void quick_sort_recursion(int *array, size_t low, size_t high)
 {
-	size_t pivot_index;
+    size_t pivot_index;
 
-	if (low < high)
-	{
-		pivot_index = partition(array, low, high);
-		if (test)
-			printf("Low = %ld \t High = %ld\n", low, high);
-		if (pivot_index > 1)
-		{
-			quick_sort_recursion(array, low, pivot_index - 1);
-		}
-		if (test)
-			printf("Low = %ld \t High = %ld\n \t Pivot Index %ld\n",
-				   low, high, pivot_index);
-		if (high > 1)
-			quick_sort_recursion(array, pivot_index + 1, high);
-
-		if (test)
-			printf("Low = %ld \t High = %ld\n", low, high);
-	}
+    if (low < high)
+    {
+        pivot_index = partition(array, low, high);
+        if (pivot_index > 1)
+            quick_sort_recursion(array, low, pivot_index - 1);
+        if (high > 1)
+            quick_sort_recursion(array, pivot_index + 1, high);
+    }
 }
-
 /**
- * quick_sort - Entry point
- * @array: arg
- * @size: arg
- * Return: -
+ * quick_sort - function to perform quick sort algorithm
+ * @array: pointer to array of integers
+ * @size: number of element in the array
+ * Return: Nothing
  */
 void quick_sort(int *array, size_t size)
 {
-	quick_sort_recursion(array, 0, size - 1);
+    quick_sort_recursion(array, 0, size - 1);
 }
