@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include "sort.h"
+#define test 0
 
 void swap(int *a, int *b)
 {
@@ -22,7 +23,8 @@ size_t partition(int *array, size_t low, size_t high)
         }
     }
     swap(&array[i + 1], &array[high]);
-    printf("value of index pivot is %ld\n", i  + 1);
+    if (test)
+        printf("value of index pivot is %ld\n", i  + 1);
     return i + 1;
 }
 
@@ -31,11 +33,19 @@ void quick_sort_recursion(int *array, size_t low, size_t high)
     if (low < high)
     {
         size_t pivot_index = partition(array, low, high);
-        printf("Low = %ld \t High = %ld\n", low, high);
-        quick_sort_recursion(array, low, pivot_index - 1);
-        printf("Low = %ld \t High = %ld\n \t Pivot Index %ld\n", low, high, pivot_index);
+        if (test)
+            printf("Low = %ld \t High = %ld\n", low, high);
+        if (pivot_index > 1)
+        {
+                quick_sort_recursion(array, low, pivot_index - 1);
+                print_array(array, high);
+        }
+        if (test)
+            printf("Low = %ld \t High = %ld\n \t Pivot Index %ld\n", low, high, pivot_index);
         quick_sort_recursion(array, pivot_index + 1, high);
-        printf("Low = %ld \t High = %ld\n", low, high);
+        if (test)
+            printf("Low = %ld \t High = %ld\n", low, high);
+        print_array(array, high);
     }
 }
 void quick_sort(int *array, size_t size)
