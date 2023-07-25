@@ -32,5 +32,6 @@ void swap(int *a, int *b);
 size_t partition(int *array, size_t low, size_t high, size_t size);
 void quick_sort(int *array, size_t size);
 void quick_sort_recursion(int *array, size_t low, size_t high, size_t size);
+void counting_sort(int *array, size_t size);
 
 #endif
