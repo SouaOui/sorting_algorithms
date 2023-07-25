@@ -16,6 +16,7 @@ void swap(int *a, int *b)
  * @array: pointer to array
  * @low: index of the start
  * @high: index of the end
+ * @size: array size
  * Return: Nothing
  */
 size_t partition(int *array, size_t low, size_t high, size_t size)
@@ -46,6 +47,7 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
  * @array: array of integers
  * @low: index of the start
  * @high: index of the end
+ * @size: array size
  * Return: Nothing
  */
 void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
