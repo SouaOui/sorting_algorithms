@@ -4,7 +4,7 @@
  * counting_sort - Entry point
  * @array: The character to print
  * @size: The character to print
- * Return: Always 0 (Success)
+ * Return: -
  */
 void counting_sort(int *array, size_t size)
 {
